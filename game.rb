@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Creates a board that tracks positions
 class Board
   def initialize
@@ -8,15 +10,27 @@ class Board
     print "\n---------------\n"
   end
 
-  def print_board(board = @board_as_array)
+  def print_board
     print_line
-    board.map do |row|
+    @board_as_array.map do |row|
       row.map { |square| print "| #{square} |" }
       print_line
     end
     print "\n"
   end
+
+  def write_board(letter, x_pos, y_pos)
+    @board_as_array[x_pos][y_pos] = letter
+  end
+
+  # get rid of this at the end, but keep now for debugging purposes
+  def print_row(pos)
+    @board_as_array[pos]
+  end
 end
 
 board = Board.new
+board.print_board
+board.write_board('A', 1, 1)
+print board.print_row(2)
 board.print_board
