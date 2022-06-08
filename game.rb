@@ -3,7 +3,7 @@
 # Creates a board that tracks positions
 class Board
   def initialize
-    @board_as_array = Array.new(3, Array.new(3, '+'))
+    @board_as_array = Array.new(3) { Array.new(3, '+') }
   end
 
   def print_line
@@ -32,5 +32,4 @@ end
 board = Board.new
 board.print_board
 board.write_board('A', 1, 1)
-print board.print_row(2)
 board.print_board
