@@ -1,16 +1,18 @@
-
+# frozen_string_literal: true
 
 require_relative './gameboard'
 
 def get_player(player)
-  letter = gets.chomp("#{player} please pick a letter. Only a single letter is allowed")
+  puts "#{player} please pick a letter. Only a single letter is allowed"
+  letter = gets.chomp
   return letter if letter.match?(/[[:alpha:]]/)
 
   get_player(player)
 end
 
-# player_1 = get_player('player 1')
-# player_2 = get_player('player 2')
+player_1 = get_player('player 1')
+player_2 = get_player('player 2')
+# build check for player 2 not equal to player 1
 
 board = Board.new
 
