@@ -4,11 +4,6 @@
 class Board
   def initialize
     @board_as_array = Array.new(3) { Array.new(3, '+') }
-    @player_wins = 0
-  end
-
-  def print_line
-    print "\n---------------\n"
   end
 
   def print_board
@@ -24,26 +19,43 @@ class Board
     @board_as_array[x_pos][y_pos] = letter
   end
 
-  # get rid of this at the end, but keep now for debugging purposes
-  def print_row(pos)
-    @board_as_array[pos]
-  end
-
-  def check_for_win_line(player_letter)
+  def check_for_win(player_letter)
+    # variables checks for diagonal win - 1 for each diagonal
+    diag = [true, true]
+    # counts iderations throught loop
+    count = 0
     @board_as_array.reduce(Array.new(3, player_letter)) do |acc, row|
+      # basically a guard clase for a row being all the player letter
       return true if row.all? { |letter| letter == player_letter }
 
+      # tracks a diagonal win for both directions
+      diag[0] = false if row[count] != player_letter
+      diag[1] = false if row[-count] != player_letter
+      count += 1
+      # checks for column win
       row.each_with_index.map { |letter, i| letter == acc[i] ? letter : false }
-    end.any?(player_letter)
+    end.any?(player_letter) || diag.any?(true)
   end
+
+  private
+  def print_line
+    print "\n---------------\n"
+  end
+
 end
 
-board = Board.new
+
+
+until game_over == true do
+  
+end
+
+
 board.print_board
 board.write_board('A', 1, 1)
 board.print_board
-board.write_board('A', 1, 2)
+board.write_board('A', 0, 0)
 board.print_board
-board.write_board('A', 1, 0)
+board.write_board('A', 2, 2)
 board.print_board
-puts board.check_for_win_line('A')
+puts board.check_for_win('A')
