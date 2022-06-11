@@ -6,9 +6,9 @@ class Board
     @board_as_array = Array.new(3) { Array.new(3, '+') }
   end
 
-  def print_board
+  def print_board(board = @board_as_array)
     print_line
-    @board_as_array.map do |row|
+    board.map do |row|
       row.map { |square| print "| #{square} |" }
       print_line
     end

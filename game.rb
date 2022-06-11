@@ -10,11 +10,24 @@ def get_player(player)
   get_player(player)
 end
 
-player_1 = get_player('player 1')
-player_2 = get_player('player 2')
-# build check for player 2 not equal to player 1
+player1 = get_player('Player 1')
+player2 = get_player('Player 2')
+
+until player2 != player1
+  puts 'You cannot select the same letter as player 1. Try again.'
+  player2 = get_player('player 2')
+end
 
 board = Board.new
+
+example = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+board.print_board(example)
+puts 'Note the positions above. The numbers are how you choose your positions'
 
 # until game_over == true do
 #  board.write_board(player_1)
