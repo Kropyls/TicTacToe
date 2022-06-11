@@ -15,8 +15,9 @@ class Board
     print "\n"
   end
 
-  def write_board(letter, x_pos, y_pos)
-    @board_as_array[x_pos][y_pos] = letter
+  def write_board(letter, position)
+    #postion[0] is x, position[1] is y
+    @board_as_array[position[0]][position[1]] = letter
   end
 
   def check_for_win(player_letter)

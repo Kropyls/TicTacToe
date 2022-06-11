@@ -34,10 +34,10 @@ puts 'Note the positions above. The numbers are how you choose your positions'
 # end
 
 board.print_board
-board.write_board('A', 0, 2)
+board.write_board('A', [0, 2])
 board.print_board
-board.write_board('A', 1, 1)
+board.write_board('A', [1, 1])
 board.print_board
-board.write_board('A', 2, 0)
+board.write_board('A', [2, 0])
 board.print_board
 puts board.check_for_win('A')
