@@ -2,11 +2,10 @@
 
 # Creates a board that tracks positions
 class Board
-  attr_accessor :choices
+  attr_reader :board_as_array
 
   def initialize
     @board_as_array = Array.new(3) { Array.new(3, '+') }
-    @choices = Array.new(9) { |num| [num / 3, num % 3] }
   end
 
   def print_board(board = @board_as_array)
