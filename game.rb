@@ -20,7 +20,7 @@ end
 
 def get_selection(player, board, choices)
   puts "#{player} please pick a tile. Only a single digit number is allowed and cannot have already been picked."
-  selection = (Integer(gets.chomp) - 1) rescue false
+  selection = (Integer(gets.chomp) - 1) rescue (return get_selection(player, board, choices))
   return choices[selection] if selection.between?(0, 8) && board[choices[selection][0]][choices[selection][1]].eql?('+')
 
   get_selection(player, board, choices)
