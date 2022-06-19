@@ -22,22 +22,26 @@ class Board
     @board_as_array[position[0]][position[1]] = letter
   end
 
-  def check_for_win(player_letter)
-    # variables checks for diagonal win - 1 for each diagonal
-    diag = [true, true]
-    # counts iderations throught loop
+  def check_win(player)
+    row_check = true
     count = 0
-    @board_as_array.reduce(Array.new(3, player_letter)) do |acc, row|
-      # basically a guard clase for a row being all the player letter
-      return true if row.all? { |letter| letter == player_letter }
+    # first and last slots of accumulator are for tracking diagonals
+    @board_as_array.each_with_object(Array.new(5, true)) do |row, acc|
+      row.each_with_index do |letter, i|
+        # row check
+        row_check &&= letter.eql?(player)
+        # column check
+        acc[i + 1] &&= letter.eql?(player)
+      end
+      # "guard clause" for row win
+      return true if row_check.eql?(true)
 
-      # tracks a diagonal win for both directions
-      diag[0] = false if row[count] != player_letter
-      diag[1] = false if row[-(count + 1)] != player_letter
+      # diagonal checks
+      acc[0] &&= row[count].eql?(player)
+      acc[-1] &&= row[-(count + 1)].eql?(player)
       count += 1
-      # checks for column win
-      row.each_with_index.map { |letter, i| letter == acc[i] ? letter : false }
-    end.any?(player_letter) || diag.any?(true)
+      row_check = true
+    end.any?(true)
   end
 
   private

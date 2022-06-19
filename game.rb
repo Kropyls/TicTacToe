@@ -45,14 +45,14 @@ puts 'Note the positions above. The numbers are how you choose your positions'
 until game_over == true
   board.write_board(player1, get_selection('Player 1', board.board_as_array, CHOICES))
   board.print_board
-  if board.check_for_win(player1)
+  if board.check_win(player1)
     puts 'Player 1 wins!'
     game_over = true
     break
   end
   board.write_board(player2, get_selection('Player 2', board.board_as_array, CHOICES))
   board.print_board
-  if board.check_for_win(player2)
+  if board.check_win(player2)
     puts 'Player 2 wins!'
     game_over = true
   end
