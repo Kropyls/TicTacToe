@@ -10,6 +10,15 @@ example = [
 
 CHOICES = Array.new(9) { |num| [num / 3, num % 3] }
 
+def end_game(winner='Tie')
+  if winner.eql?('Tie')
+    puts 'Tie!'
+  else
+    puts "#{winner} wins!"
+  end
+  return true
+end
+
 def get_player(player)
   puts "#{player} please pick a letter. Only a single letter is allowed"
   letter = gets.chomp
@@ -46,14 +55,18 @@ until game_over == true
   board.write_board(player1, get_selection('Player 1', board.board_as_array, CHOICES))
   board.print_board
   if board.check_win(player1)
-    puts 'Player 1 wins!'
-    game_over = true
+    game_over = end_game('Player 1')
+    break
+  end
+  if board.check_for_draw
+    game_over = end_game
     break
   end
   board.write_board(player2, get_selection('Player 2', board.board_as_array, CHOICES))
   board.print_board
-  if board.check_win(player2)
-    puts 'Player 2 wins!'
-    game_over = true
+  if board.check_win(player1)
+    game_over = end_game('Player 2')
+    break
   end
+  game_over = end_game if board.check_for_draw
 end
